@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+		http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
+
+	<bean id="customerAddressService"
+		class="com.bakerbeach.market.address.service.CustomerAddressServiceImpl">
+		<property name="sequenceService" ref="sequenceService" />
+		<property name="customerAddressDao" ref="customerAddressDao" />
+	</bean>
+
+	<bean id="customerAddressDao"
+		class="com.bakerbeach.market.address.service.CustomerAddressMongoDao">
+		<property name="collectionName" value="customer_address" />
+		<property name="mongoTemplate" ref="mongoCustomerAddressTemplate" />
+	</bean>
+
+	<mongo:mongo id="mongoCustomerAddress" host="${mongo.customer_address.host}"
+		port="${mongo.customer_address.port}">
+		<mongo:options connections-per-host="${mongo.customer_address.connectionsPerHost}"
+			threads-allowed-to-block-for-connection-multiplier="${mongo.customer_address.threadsAllowedToBlockForConnectionMultiplier}"
+			connect-timeout="${mongo.customer_address.connectTimeout}"
+			max-wait-time="${mongo.customer_address.maxWaitTime}"
+			auto-connect-retry="${mongo.customer_address.autoConnectRetry}"
+			socket-keep-alive="${mongo.customer_address.socketKeepAlive}" socket-timeout="${mongo.customer_address.socketTimeout}"
+			slave-ok="${mongo.customer_address.slaveOk}" write-number="1" write-timeout="0"
+			write-fsync="true" />
+	</mongo:mongo>
+	<mongo:db-factory mongo-ref="mongoCustomerAddress"
+		id="mongoCustomerDbFactory" dbname="${mongo.customer_address.dbName}"
+		username="${mongo.customer_address.dbUser}" password="${mongo.customer_address.dbPwd}" />
+	<bean id="mongoCustomerAddressTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg name="mongoDbFactory" ref="mongoCustomerDbFactory" />
+	</bean>
+
+
+</beans>
