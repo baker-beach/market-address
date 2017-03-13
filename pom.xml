@@ -16,17 +16,17 @@
     	<dependency>
     		<groupId>com.bakerbeach.market</groupId>
     		<artifactId>market-address-api</artifactId>
-    		<version>1.0.0</version>
+    		<version>[1.0.0,1.1.0)</version>
     	</dependency>
     	<dependency>
             <groupId>com.bakerbeach.market</groupId>
             <artifactId>market-sequence-api</artifactId>
-    		<version>1.0.0</version>
+    		<version>[1.0.0,1.1.0)</version>
     	</dependency>
     	<dependency>
     		<groupId>com.bakerbeach.market</groupId>
     		<artifactId>market-sequence</artifactId>
-    		<version>1.0.0</version>
+    		<version>[1.0.0,1.1.0)</version>
     		<scope>test</scope>
     	</dependency>
     </dependencies>
