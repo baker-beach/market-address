@@ -1,7 +1,7 @@
 package com.bakerbeach.market.address.service;
 
+import com.bakerbeach.market.commons.Messages;
 import com.bakerbeach.market.core.api.model.Address;
-import com.bakerbeach.market.core.api.model.Messages;
 
 public class AddressCheckEngine {
 	
